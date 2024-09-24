@@ -1,0 +1,111 @@
+import { createContext, useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+const FeedbackContext = createContext();
+
+export const FeedbackProvider = ({ children }) => {
+  const [feedback, setFeedback] = useState([]);
+
+  const [number, setNumber] = useState(0);
+ 
+  useEffect(() => {
+    fetchFeedback();
+
+    console.log("Hello 1");
+  }, []);
+
+
+
+  // useEffect(() => {
+  //   console.log("Hello 2");
+  // }, [number]);
+
+  const iNumber = () => {
+    setNumber((prev) => {
+      return prev + 1;
+    })
+  }
+
+  
+
+  // Fetch Feedback
+  const fetchFeedback = async () => {
+    const response = await fetch("http://localhost:3000/posts");
+    const data = await response.json();
+    setFeedback(data);
+  };
+
+  const [feedbackEdit, setFeedbackEdit] = useState({
+    item: {},
+    edit: false,
+  });
+
+  // Add Feedback
+  const addFeedback = async (newFeedback) => {
+    const response = await fetch("http://localhost:3000/posts", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newFeedback),
+    });
+
+    const data = await response.json();
+    
+    setFeedback([data, ...feedback]);
+  };
+
+  // Edit Feedback
+  const editFeedback = (item) => {
+    setFeedbackEdit({
+      item: item,
+      edit: true,
+    });
+  };
+
+  // Update Feedback
+  const updateFeedback = async (id, updItem) => {
+    const response = await fetch(`http://localhost:3000/posts/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updItem),
+    });
+
+    const data = await response.json();
+    setFeedback(
+      feedback.map((item) => (item.id === id ? { ...item, ...data } : item))
+    );
+  };
+
+  // Delete Feedback
+  const deleteFeedback = async (id) => {
+    if (window.confirm("Are you sure?")) {
+      await fetch(`http://localhost:3000/posts/${id}`, {
+        method: "DELETE",
+      });
+
+      setFeedback(feedback.filter((item) => item.id !== id));
+    }
+  };
+
+  return (
+    <FeedbackContext.Provider
+      value={{
+        feedback,
+        feedbackEdit,
+        deleteFeedback,
+        addFeedback,
+        updateFeedback,
+        editFeedback,
+        iNumber,
+        number
+      }}
+    >
+      {children}
+    </FeedbackContext.Provider>
+  );
+};
+
+export default FeedbackContext;
