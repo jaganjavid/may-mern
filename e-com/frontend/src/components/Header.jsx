@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = () => {
   return (
     <div className="navbar bg-base-100">
     <div className="flex-1">
-      <a className="btn btn-ghost text-xl">ECOM</a>
+      <Link to="/" className="btn btn-ghost text-xl">ECOM</Link>
     </div>
     <div className="flex-none">
       <ul className="menu menu-horizontal px-1">
-        <li><a>Cart (5)</a></li>
+        <li><Link to="/cart">Cart (5)</Link></li>
         <li>
           <details>
             <summary>Jagan</summary>
