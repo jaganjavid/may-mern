@@ -53,7 +53,7 @@ const products = [
     brand: 'Modern Living',
     category: 'Furniture',
     price: 199.99,
-    countInStock: 20,
+    countInStock: 0,
     rating: 4.6,
     numReviews: 15,
   },
