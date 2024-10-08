@@ -8,8 +8,8 @@ const products = [
       brand: 'Furniture World',
       category: 'Furniture',
       price: 899.99,
-      countInStock: 15,
       rating: 4.8,
+      countInStock: 15,
       numReviews: 10,
     },
     {
@@ -20,8 +20,8 @@ const products = [
       brand: 'Home Harmony',
       category: 'Furniture',
       price: 549.99,
-      countInStock: 8,
       rating: 4.5,
+      countInStock: 8,
       numReviews: 6,
     },
     {
@@ -32,8 +32,8 @@ const products = [
       brand: 'Antique Designs',
       category: 'Furniture',
       price: 349.99,
-      countInStock: 12,
       rating: 4.2,
+      countInStock: 12,
       numReviews: 8,
     },
     {
@@ -44,8 +44,8 @@ const products = [
       brand: 'Modern Living',
       category: 'Furniture',
       price: 199.99,
-      countInStock: 0,
       rating: 4.6,
+      countInStock: 0,
       numReviews: 15,
     },
     {
@@ -56,8 +56,8 @@ const products = [
       brand: 'Cozy Home',
       category: 'Furniture',
       price: 299.99,
-      countInStock: 6,
       rating: 4.0,
+      countInStock: 6,
       numReviews: 4,
     },
     {
@@ -68,8 +68,8 @@ const products = [
       brand: 'Country Living',
       category: 'Furniture',
       price: 449.99,
-      countInStock: 10,
       rating: 4.4,
+      countInStock: 10,
       numReviews: 7,
     },
   ];
