@@ -1,25 +1,17 @@
 import { useParams, Link } from "react-router-dom";
-import products from "../../products";
 import Rating from "../components/Rating";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useGetProductDetailsQuery } from "../slices/productsApiSlices";
+
 
 const ProductScreen = () => {
 
   const { id: productId } = useParams();
-  const [product, setProduct] = useState({});
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-       const { data } = await axios.get(`http://localhost:5000/api/products/${productId}`);
-
-       setProduct(data);
-    }
-
-    fetchProduct();
-  }, [productId])
-
+  const { data:product, error, isLoading } = useGetProductDetailsQuery(productId);
+  
  
+  if(isLoading) return <p>Loading...</p>
+  if(error) return <p>Error: {error}</p>
 
 
   return (
