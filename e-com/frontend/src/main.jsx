@@ -8,11 +8,12 @@ import {
    Route,
 } from "react-router-dom";
 import HomeScreen from './pages/HomeScreen.jsx';
-import CartScreen from "./pages/CardScreen.jsx";
+
 import LoginScreen from "./pages/LoginScreen.jsx";
 import ProductScreen from './pages/ProductScreen.jsx';
 import { Provider } from 'react-redux';
 import { store } from './store.js';
+import CartScreen from './pages/CartScreen.jsx';
 
 const router = createBrowserRouter(
    createRoutesFromElements(
