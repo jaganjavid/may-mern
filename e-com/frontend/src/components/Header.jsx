@@ -1,7 +1,12 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
+
+ 
+  const { cartItem } = useSelector((state) => state.cart);
+  
   return (
     <div className="navbar bg-base-100">
     <div className="flex-1">
@@ -9,7 +14,13 @@ const Header = () => {
     </div>
     <div className="flex-none">
       <ul className="menu menu-horizontal px-1">
-        <li><Link to="/cart">Cart (5)</Link></li>
+        <li>
+          <Link to="/cart">Cart 
+            <span>
+              {cartItem.length > 0 ? cartItem.length : 0}
+            </span>
+          </Link>
+        </li>
         <li>
           <details>
             <summary>Jagan</summary>
