@@ -9,12 +9,13 @@
     "server": "nodemon backend/server.js",
     "client": "npm run dev --prefix frontend",
     "both": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import":"node backend/seeder.js",
-    "data:destroy":"node backend/seeder.js -d"
+    "data:import": "node backend/seeder.js",
+    "data:destroy": "node backend/seeder.js -d"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "concurrently": "^9.0.1",
     "cors": "^2.8.5",
     "express": "^4.21.0",
