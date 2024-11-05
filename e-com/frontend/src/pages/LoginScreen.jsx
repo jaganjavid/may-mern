@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../slices/userApiSlice';
+import { setCredentials } from "../slices/authSlice";
 import { toast } from 'react-toastify';
 
 const LoginScreen = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const [login, { isLoading }] = useLoginMutation();
+    const [loginApiCall, { isLoading }] = useLoginMutation();
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -19,7 +21,9 @@ const LoginScreen = () => {
             alert('Please fill in all fields');
         } else {
             try {
-              const res = await login({ email, password }).unwrap();
+              const res = await loginApiCall({ email, password }).unwrap();
+
+              dispatch(setCredentials({...res})); 
               
               navigate('/');
             } catch (error) {
