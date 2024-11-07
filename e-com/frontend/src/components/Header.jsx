@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useLogoutMutation } from "../slices/userApiSlice";
 import { logout } from "../slices/authSlice";
 
+
 const Header = () => {
 
  
@@ -53,7 +54,7 @@ const Header = () => {
             <summary>{userInfo.name}</summary>
             <ul className="bg-base-100 rounded-t-none p-2">
               <li><a>Dark</a></li>
-              <li><a>Profile</a></li>
+              <li><Link to="/profile">Profile</Link></li>
               <li onClick={logoutHandler}><a>Logout</a></li>
             </ul>
           </details>) : (<li>

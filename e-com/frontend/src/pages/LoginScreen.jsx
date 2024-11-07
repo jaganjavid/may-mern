@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../slices/userApiSlice';
 import { setCredentials } from "../slices/authSlice";
 import { toast } from 'react-toastify';
@@ -13,6 +13,23 @@ const LoginScreen = () => {
     const navigate = useNavigate();
 
     const [loginApiCall, { isLoading }] = useLoginMutation();
+
+    const { userInfo } = useSelector((state) => state.auth);
+
+    const { search } = useLocation();
+
+    const sp = new URLSearchParams(search);
+
+    // console.log(sp);
+
+    const redirect = sp.get("redirect") || "/";
+
+    useEffect(() => {
+      if(userInfo){
+        navigate(redirect);
+      }
+    }, [userInfo, redirect])
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
