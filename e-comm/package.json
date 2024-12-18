@@ -5,8 +5,8 @@
   "type":"module",
   "scripts": {
     "start":"node backend/app.js",
-    "dev":"nodemon backend/app.js",
-    "prod":"nodemon backend/app.js"
+    "dev":"NODE_ENV=DEVELOPMENT nodemon backend/app.js",
+    "prod":"NODE_ENV=PRODUCTION nodemon backend/app.js"
   },
   "author": "",
   "license": "ISC",

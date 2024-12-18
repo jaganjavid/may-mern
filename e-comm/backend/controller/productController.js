@@ -1,5 +1,6 @@
 import Product from "../models/product.js";
-
+import ErrorHandler from "../utils/errorHandler.js";
+import catchAsyncErrors from "../middleware/catchAsyncErrors.js";
 
 // GET ALL Products
 
@@ -14,7 +15,7 @@ export const getProducts = async(req, res) => {
 // Create a new Product
 export const newProducts = async (req, res) => {
 
-    console.log(req.body);
+    // console.log(req.body);
 
     const product = await Product.create(req.body);
 
@@ -25,19 +26,20 @@ export const newProducts = async (req, res) => {
 }
 
 // Get Product Details
-export const getProductDetails = async (req, res) => {
+export const getProductDetails = catchAsyncErrors(async (req, res, next) => {
 
     const product = await Product.findById(req.params.id);
 
     if(!product){
-        res.status(404).json({
-            error:"Product not found"
-        })
+        // res.status(404).json({
+        //     error:"Product not found"
+        // })
+        return next(new ErrorHandler("Product not found", 404));
     }
 
     res.status(200).json({product});
 
-}
+});
 
 // Update Products
 export const updateProduct = async(req, res) => {
@@ -45,9 +47,10 @@ export const updateProduct = async(req, res) => {
     let product = await Product.findById(req.params.id);
 
     if(!product){
-        res.status(404).json({
-            error:"Product not found"
-        })
+        // res.status(404).json({
+        //     error:"Product not found"
+        // })
+        return next(new ErrorHandler("Product not found", 404));
     }
 
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {new:true});
@@ -62,9 +65,10 @@ export const deleteProduct = async(req, res) => {
     let product = await Product.findById(req.params.id);
 
     if(!product){
-        res.status(404).json({
-            error:"Product not found"
-        })
+        // res.status(404).json({
+        //     error:"Product not found"
+        // })
+        return next(new ErrorHandler("Product not found", 404));
     }
 
     product = await Product.deleteOne();
@@ -74,3 +78,4 @@ export const deleteProduct = async(req, res) => {
     });
 
 }
+
